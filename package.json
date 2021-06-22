@@ -1,7 +1,6 @@
 {
     "name": "components-library",
     "version": "0.1.0",
-    "private": true,
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
@@ -33,8 +32,10 @@
     "jest": {
         "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"
     },
-    "main": "./dist/components-library.common.js",
+    "main": "./dist/components-library.umd.js",
     "files": [
-        "dist/*"
-    ]
+        "dist/*",
+        "types/*"
+    ],
+    "types": "./types/index.d.ts"
 }
