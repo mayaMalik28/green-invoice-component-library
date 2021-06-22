@@ -1,9 +1,5 @@
 <template  >
-  <form
-    v-if="fields"
-    class="ma-form"
-    @submit.prevent="submitForm"
-  >
+  <form v-if="fields" class="ma-form" @submit.prevent="submitForm">
     <MaTextField
       v-for="(field, index) in fields"
       :key="index"
@@ -19,14 +15,16 @@
       <MaButton
         class="submit-button"
         @click="submitForm"
-        :text="submitButtonText"
+        :text="submitBtnContent.text"
       />
       <MaButton
-        v-if="nonSubmitButtonText"
+        v-if="secondBtnContent"
         class="second-button"
         color="blue"
         :frameOnly="true"
-        :text="nonSubmitButtonText"
+        :text="secondBtnContent.text"
+        :iconUrl="secondBtnContent.iconUrl"
+        :iconHeight="secondBtnContent.iconHeight"
       />
     </div>
   </form>
@@ -52,9 +50,15 @@ export default class MaForm extends Vue {
     value?: string;
     invalid?: boolean | undefined;
   }[];
-  @Prop() submitButtonText!: string;
-  @Prop() nonSubmitButtonText!: string;
-  @Prop() invalid!:boolean;
+  @Prop() submitBtnContent!: {
+    text: string;
+  };
+  @Prop() secondBtnContent!: {
+    text: string;
+    iconUrl: string;
+    iconHeight: string;
+  };
+  @Prop() invalid!: boolean;
 
   submitForm(e: any) {
     this.$emit("submit", this.fields);
@@ -63,7 +67,6 @@ export default class MaForm extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "../../assets/scss/setup.scss";
 .ma-form {
   display: flex;
   flex-direction: column;
@@ -75,10 +78,10 @@ export default class MaForm extends Vue {
     justify-content: space-between;
     margin-top: 65px;
     .submit-button {
-      width: 55%;
+      width: 52%;
     }
     .second-button {
-      width: 42%;
+      width: 46%;
     }
   }
 }

@@ -16,9 +16,5 @@ export default class MaLoader extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "../../assets/scss/setup.scss";
-.ma-form {
-  display: flex;
-  flex-direction: column;
-}
+
 </style>

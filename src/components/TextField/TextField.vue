@@ -69,7 +69,6 @@ export default class MaTextField extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "../../assets/scss/setup.scss";
 .ma-text-field {
   display: flex;
   flex-direction: column;
@@ -93,6 +92,7 @@ export default class MaTextField extends Vue {
     }
     input {
       color: #23445a;
+      background-color: white;
       border: none;
       outline: none;
       font-size: 1em;
@@ -106,6 +106,7 @@ export default class MaTextField extends Vue {
   &.info-underline {
     p {
       text-decoration: underline;
+      cursor: pointer;
     }
   }
   &.focus {

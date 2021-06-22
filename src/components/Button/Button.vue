@@ -1,6 +1,8 @@
 <template>
-  <button type="button" :class="classes" @click="onClick" :style="style">
-    {{ text }}
+  <button type="button" class="flex center" :class="classes" @click="onClick" :style="style">
+    <p>{{text}}</p>
+        <img v-if="iconUrl" src="@/assets/Google_G.svg" :height="iconHeight" alt="">
+    <!-- <img v-if="iconUrl" :src="getIconUrl" :height="iconHeight" alt=""> -->
   </button>
 </template>
 <script lang="ts">
@@ -9,6 +11,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class MaButton extends Vue {
   @Prop() text!: string;
+  @Prop() costumedColor!: string;
   @Prop() color!: "green" | "blue";
   @Prop() frameOnly!: boolean;
   @Prop() width!: string;
@@ -17,6 +20,8 @@ export default class MaButton extends Vue {
   @Prop() fontSize!: string;
   @Prop() disabled!: boolean;
   @Prop() loading!: boolean;
+  @Prop() iconUrl!:string;
+  @Prop() iconHeight!:string;
 
   onClick(): void {
     this.$emit("click");
@@ -24,7 +29,7 @@ export default class MaButton extends Vue {
 
   get classes(): string {
     let classes = "ma-button ";
-    classes += (this.color ? this.color : "green") + " ";
+    classes += this.color ? this.color + " " : "green";
     classes += this.frameOnly ? "frame-only " : "";
     classes += this.loading || this.disabled ? "disabled" : "";
     return classes;
@@ -32,19 +37,20 @@ export default class MaButton extends Vue {
 
   get style(): string {
     let style = "";
+    if (this.costumedColor) style += `background-color:${this.costumedColor}`;
     if (this.height) style += `height: ${this.height};`;
     if (this.width) style += `width: ${this.width};`;
     if (this.fontFamily) style += `font-family: ${this.fontFamily};`;
     if (this.fontSize) style += `font-size: ${this.fontSize};`;
     return style;
   }
+
 }
 </script>
 
 <style scoped lang="scss">
-@import "../../assets/scss/setup.scss";
 .ma-button {
-  font-family: heebo-Black, sans-serif;
+  font-family: heebo-black, sans-serif;
   font-weight: 400;
   border-radius: 100px;
   color: #ffffff;
@@ -52,6 +58,11 @@ export default class MaButton extends Vue {
   border: none;
   padding: 10px;
   min-width: 100px;
+  p{
+    display:inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
   &.green {
     background-color: #18c746;
     &.disabled {
